@@ -3,6 +3,9 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { Rocket, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { addXLayerNetwork } from '@/lib/web3-utils';
+import { useAccount, useSwitchChain } from 'wagmi';
+import { xLayer } from '@/config/wagmi';
 
 interface HeaderProps {
   onCreateClick: () => void;
@@ -11,6 +14,17 @@ interface HeaderProps {
 
 export default function Header({ onCreateClick, onDiscoverClick }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { address, isConnected } = useAccount();
+  const { switchChain } = useSwitchChain();
+
+  const handleConnectAndNetwork = async () => {
+    try {
+      // Add X Layer network if it doesn't exist
+      await addXLayerNetwork();
+    } catch (error) {
+      console.error('Failed to add/switch to X Layer network:', error);
+    }
+  };
 
   const navItems = [
     { label: 'Discover', onClick: onDiscoverClick },
@@ -81,7 +95,10 @@ export default function Header({ onCreateClick, onDiscoverClick }: HeaderProps) 
                       if (!connected) {
                         return (
                           <Button
-                            onClick={openConnectModal}
+                            onClick={async () => {
+                              await handleConnectAndNetwork();
+                              openConnectModal();
+                            }}
                             className="glass-card hover:bg-white/10 transition-all duration-300"
                             data-testid="button-connect-wallet"
                           >
@@ -94,12 +111,15 @@ export default function Header({ onCreateClick, onDiscoverClick }: HeaderProps) 
                       if (chain.unsupported) {
                         return (
                           <Button
-                            onClick={openChainModal}
+                            onClick={async () => {
+                              await handleConnectAndNetwork();
+                              openChainModal();
+                            }}
                             className="glass-card hover:bg-white/10 transition-all duration-300"
                             variant="destructive"
                             data-testid="button-wrong-network"
                           >
-                            Wrong network
+                            Switch to X Layer
                           </Button>
                         );
                       }
