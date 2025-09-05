@@ -1,6 +1,29 @@
+HEAD
 node_modules
 dist
 .DS_Store
 server/public
 vite.config.ts.*
 *.tar.gz
+
+# Dependencies
+node_modules/
+package-lock.json
+
+# Environment
+.env
+.env.local
+
+# Build
+dist/
+artifacts/
+cache/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+34896e69fad04d9f906d8de5bccf4b201e1d4662
