@@ -3,9 +3,9 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { Rocket, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { addXLayerNetwork } from '@/lib/web3-utils';
+import { addXLayerTestnetNetwork } from '@/lib/web3-utils';
 import { useAccount, useSwitchChain } from 'wagmi';
-import { xLayer } from '@/config/wagmi';
+import { xLayerTestnet } from '@/config/wagmi';
 
 interface HeaderProps {
   onCreateClick: () => void;
@@ -20,7 +20,7 @@ export default function Header({ onCreateClick, onDiscoverClick }: HeaderProps) 
   const handleConnectAndNetwork = async () => {
     try {
       // Add X Layer network if it doesn't exist
-      await addXLayerNetwork();
+      await addXLayerTestnetNetwork();
     } catch (error) {
       console.error('Failed to add/switch to X Layer network:', error);
     }

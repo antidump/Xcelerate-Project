@@ -1,0 +1,63 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "BondingCurve",
+  "sourceName": "contracts/libraries/BondingCurve.sol",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "DEFAULT_VIRTUAL_OKB",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "DEFAULT_VIRTUAL_TOKENS",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "GRADUATION_THRESHOLD",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "MAX_SUPPLY_FOR_CURVE",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x6080806040523461001a576101019081610020823930815050f35b600080fdfe6080806040526004361015601257600080fd5b600090813560e01c9081634f39cb361460a7575080639571b275146086578063d73337df1460685763fcfc0c0914604857600080fd5b8060031936011260655760206040516804563918244f4000008152f35b80fd5b508060031936011260655760206040516801a055690d9db800008152f35b508060031936011260655760206040516b037790968dc8efffd10000008152f35b90508160031936011260c757806b0295be96e64066972000000060209252f35b5080fdfea2646970667358221220770494c66b019ec4a8946d3447fcadf643ba2de9601b7e621a05932e9952190264736f6c63430008140033",
+  "deployedBytecode": "0x6080806040526004361015601257600080fd5b600090813560e01c9081634f39cb361460a7575080639571b275146086578063d73337df1460685763fcfc0c0914604857600080fd5b8060031936011260655760206040516804563918244f4000008152f35b80fd5b508060031936011260655760206040516801a055690d9db800008152f35b508060031936011260655760206040516b037790968dc8efffd10000008152f35b90508160031936011260c757806b0295be96e64066972000000060209252f35b5080fdfea2646970667358221220770494c66b019ec4a8946d3447fcadf643ba2de9601b7e621a05932e9952190264736f6c63430008140033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

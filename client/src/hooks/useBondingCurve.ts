@@ -55,13 +55,14 @@ export function useBondingCurve(tokenId?: string) {
       const tokenResponse = await fetch(`/api/tokens/${tokenId}`);
       const token = await tokenResponse.json();
 
-      // Execute contract call
+      // Execute contract call with low gas price for testnet
       writeContract({
         address: CONTRACTS.BONDING_CURVE,
         abi: BONDING_CURVE_ABI,
         functionName: 'buyTokens',
         args: [token.address, parseEther(okbAmount), parseEther(minTokens)],
         value: parseEther(okbAmount),
+        gasPrice: 1000000000n, // 1 gwei for testnet
       });
 
       return { okbAmount, minTokens, token };
@@ -96,6 +97,7 @@ export function useBondingCurve(tokenId?: string) {
         abi: ERC20_ABI,
         functionName: 'approve',
         args: [CONTRACTS.BONDING_CURVE, parseEther(tokenAmount)],
+        gasPrice: 1000000000n, // 1 gwei for testnet
       });
 
       // Then sell (in real app, wait for approval first)
@@ -104,6 +106,7 @@ export function useBondingCurve(tokenId?: string) {
         abi: BONDING_CURVE_ABI,
         functionName: 'sellTokens',
         args: [token.address, parseEther(tokenAmount), parseEther(minOkb)],
+        gasPrice: 1000000000n, // 1 gwei for testnet
       });
 
       return { tokenAmount, minOkb, token };

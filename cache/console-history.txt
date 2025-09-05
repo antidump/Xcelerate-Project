@@ -1,0 +1,7 @@
+.exit
+provider.getNetwork()
+ethers.getNetwork()
+.help
+exit
+cd ..
+cd .. && npx hardhat run scripts/deployment-summary.js --network xlayer-testnet

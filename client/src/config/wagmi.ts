@@ -3,13 +3,12 @@ import { defineChain } from 'viem';
 import {
   metaMaskWallet,
   okxWallet,
-  walletConnectWallet,
 } from '@rainbow-me/rainbowkit/wallets';
 
-// X Layer network configuration
-export const xLayer = defineChain({
-  id: 196,
-  name: 'X Layer',
+// X Layer testnet configuration
+export const xLayerTestnet = defineChain({
+  id: 1952,
+  name: 'X Layer Testnet',
   nativeCurrency: {
     decimals: 18,
     name: 'OKB',
@@ -17,30 +16,30 @@ export const xLayer = defineChain({
   },
   rpcUrls: {
     default: {
-      http: ['https://rpc.xlayer.tech'],
-      webSocket: ['wss://ws.xlayer.tech'],
+      http: [
+        'https://testrpc.xlayer.tech/terigon'
+      ],
     },
   },
   blockExplorers: {
     default: {
-      name: 'OKLink',
-      url: 'https://www.oklink.com/xlayer',
+      name: 'OKLink Testnet',
+      url: 'https://www.oklink.com/xlayer-testnet',
     },
   },
-  testnet: false,
+  testnet: true,
 });
 
 export const wagmiConfig = getDefaultConfig({
   appName: 'Xcelerate',
-  projectId: import.meta.env.VITE_WALLET_CONNECT_PROJECT_ID || 'c3794de0-7e89-4d67-8142-8c4b9d8e9b4a',
-  chains: [xLayer],
+  projectId: 'c3794de0-7e89-4d67-8142-8c4b9d8e9b4a',
+  chains: [xLayerTestnet],
   wallets: [
     {
       groupName: 'Recommended',
       wallets: [
         metaMaskWallet,
         okxWallet,
-        walletConnectWallet,
       ],
     },
   ],

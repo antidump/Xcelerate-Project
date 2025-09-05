@@ -1,0 +1,15 @@
+{
+  "network": "X Layer Testnet",
+  "deployer": "0xCd8235F71d6694241EEfa360faC722c4b762d053",
+  "timestamp": "2025-09-05T08:03:05.968Z",
+  "contracts": {
+    "WOKB": "0x298559c632cA6771eaF20ce24cac4fec24f10948",
+    "Registry": "0x4C7943d2bb06a40A0e8B36ba846feEfd6A3ff010",
+    "FeeManager": "0x97974a70ddbC578E81143DB1e635FbA3aa80931A",
+    "UserManagement": "0x4a9Cab7d650b481F7a44dCa4C3B893baF4Ae7e30",
+    "LiquidityPoolContract": "0xC4F4fBe190c446fE2f9cd020FEeb4DAD3224b43E",
+    "MarketGraduation": "0xb5F38c9BC288c585a63ab18ea5e425bDA2755391",
+    "BondingCurveContract": "0x08Ddf630e7Cd6FCEa435588a80028AF2b75FfFD7",
+    "TokenFactory": "0xfB5ACFc398AE85cF3A2CFFc9dB6B1E8b42f3A701"
+  }
+}

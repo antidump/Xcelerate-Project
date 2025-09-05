@@ -1,117 +1,96 @@
+// Auto-generated contract addresses
+// Generated at: 2025-09-05T08:03:05.968Z
+// Network: X Layer Testnet
+// Deployer: 0xCd8235F71d6694241EEfa360faC722c4b762d053
+
 export const CONTRACTS = {
-  WOKB: '0x952E6c15BEA13B9A6077419456B59f46c43F2934',
-  REGISTRY: '0xF08511fb706A5a84Ae7738f8a6cA24D5162cc895',
-  TOKEN_FACTORY: '0x7689A7ce1d9a09e2B996cCCb6cD81c015D5E36d3',
-  BONDING_CURVE: '0xd64fd6b463aC54252FAB669a29d51Ae3373C3467',
-  LIQUIDITY_POOL: '0xDC225E7d4e3a1e5A65aC39F4B60E85f7657FFf0C',
-  USER_MANAGEMENT: '0x7231bB2Ebc50cB32731cf7303E077B0042ab6778',
-  FEE_MANAGER: '0xCaCbd1C17f36061593181B6E482DaB822815c9a5',
-  MARKET_GRADUATION: '0x7Df5fda5E528ba80E84C3462cA7D7454c5129c7b',
+  TOKEN_FACTORY: "0xfB5ACFc398AE85cF3A2CFFc9dB6B1E8b42f3A701",
+  BONDING_CURVE: "0x08Ddf630e7Cd6FCEa435588a80028AF2b75FfFD7",
+  REGISTRY: "0x4C7943d2bb06a40A0e8B36ba846feEfd6A3ff010",
+  FEE_MANAGER: "0x97974a70ddbC578E81143DB1e635FbA3aa80931A",
+  USER_MANAGEMENT: "0x4a9Cab7d650b481F7a44dCa4C3B893baF4Ae7e30",
+  LIQUIDITY_POOL: "0xC4F4fBe190c446fE2f9cd020FEeb4DAD3224b43E",
+  MARKET_GRADUATION: "0xb5F38c9BC288c585a63ab18ea5e425bDA2755391",
+  WOKB: "0x298559c632cA6771eaF20ce24cac4fec24f10948",
 } as const;
 
 export const CONSTANTS = {
-  GRADUATION_THRESHOLD: '80000000000000000000', // 80 OKB
-  MAX_SUPPLY_FOR_CURVE: '800000000000000000000000000', // 800M tokens
-  DEFAULT_VIRTUAL_OKB: '30000000000000000000', // 30 OKB
-  DEFAULT_VIRTUAL_TOKENS: '1073000000000000000000000000', // 1.073B tokens
-  CREATION_FEE: '1000000000000000', // 0.001 OKB
+  CREATION_FEE: "1000000000000000", // 0.001 OKB in wei
+  GRADUATION_THRESHOLD: "80000000000000000000", // 80 OKB in wei
+  MAX_SUPPLY: "1000000000000000000000000000", // 1B tokens in wei
 } as const;
 
-// ERC20 ABI for token interactions
+// ERC20 ABI (minimal)
 export const ERC20_ABI = [
-  {
-    inputs: [{ name: "spender", type: "address" }, { name: "amount", type: "uint256" }],
-    name: "approve",
-    outputs: [{ name: "", type: "bool" }],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [{ name: "account", type: "address" }],
-    name: "balanceOf",
-    outputs: [{ name: "", type: "uint256" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "decimals",
-    outputs: [{ name: "", type: "uint8" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "name",
-    outputs: [{ name: "", type: "string" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "symbol",
-    outputs: [{ name: "", type: "string" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "totalSupply",
-    outputs: [{ name: "", type: "uint256" }],
-    stateMutability: "view",
-    type: "function",
-  },
+  "function balanceOf(address owner) view returns (uint256)",
+  "function transfer(address to, uint256 amount) returns (bool)",
+  "function transferFrom(address from, address to, uint256 amount) returns (bool)",
+  "function approve(address spender, uint256 amount) returns (bool)",
+  "function allowance(address owner, address spender) view returns (uint256)",
+  "function totalSupply() view returns (uint256)",
+  "function name() view returns (string)",
+  "function symbol() view returns (string)",
+  "function decimals() view returns (uint8)",
+  "event Transfer(address indexed from, address indexed to, uint256 value)",
+  "event Approval(address indexed owner, address indexed spender, uint256 value)"
 ] as const;
 
-// Bonding Curve Contract ABI
-export const BONDING_CURVE_ABI = [
-  {
-    inputs: [
-      { name: "tokenAddress", type: "address" },
-      { name: "okbAmount", type: "uint256" },
-      { name: "minTokens", type: "uint256" }
-    ],
-    name: "buyTokens",
-    outputs: [],
-    stateMutability: "payable",
-    type: "function",
-  },
-  {
-    inputs: [
-      { name: "tokenAddress", type: "address" },
-      { name: "tokenAmount", type: "uint256" },
-      { name: "minOkb", type: "uint256" }
-    ],
-    name: "sellTokens",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      { name: "tokenAddress", type: "address" },
-      { name: "okbAmount", type: "uint256" },
-      { name: "isBuy", type: "bool" }
-    ],
-    name: "calculateTokens",
-    outputs: [{ name: "", type: "uint256" }],
-    stateMutability: "view",
-    type: "function",
-  },
-] as const;
-
-// Token Factory ABI
+// TokenFactory ABI
 export const TOKEN_FACTORY_ABI = [
   {
-    inputs: [
-      { name: "name", type: "string" },
-      { name: "symbol", type: "string" },
-      { name: "description", type: "string" },
-      { name: "imageUrl", type: "string" }
+    "type": "function",
+    "name": "createToken",
+    "inputs": [
+      {"name": "name", "type": "string"},
+      {"name": "symbol", "type": "string"},
+      {"name": "imageUri", "type": "string"},
+      {"name": "description", "type": "string"}
     ],
-    name: "createToken",
-    outputs: [{ name: "", type: "address" }],
-    stateMutability: "payable",
-    type: "function",
+    "outputs": [{"name": "", "type": "address"}],
+    "stateMutability": "payable"
   },
+  {
+    "type": "function",
+    "name": "getTokenCount",
+    "inputs": [],
+    "outputs": [{"name": "", "type": "uint256"}],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "getAllTokens",
+    "inputs": [],
+    "outputs": [{"name": "", "type": "address[]"}],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "getCreatorTokens",
+    "inputs": [{"name": "creator", "type": "address"}],
+    "outputs": [{"name": "", "type": "address[]"}],
+    "stateMutability": "view"
+  },
+  {
+    "type": "event",
+    "name": "TokenCreated",
+    "inputs": [
+      {"name": "tokenAddress", "type": "address", "indexed": true},
+      {"name": "creator", "type": "address", "indexed": true},
+      {"name": "name", "type": "string", "indexed": false},
+      {"name": "symbol", "type": "string", "indexed": false},
+      {"name": "totalSupply", "type": "uint256", "indexed": false}
+    ]
+  }
+] as const;
+
+// BondingCurve ABI
+export const BONDING_CURVE_ABI = [
+  "function buyTokens(address token, uint256 okbAmount) external payable returns (uint256)",
+  "function sellTokens(address token, uint256 tokenAmount) external returns (uint256)",
+  "function getPrice(address token, uint256 amount) external view returns (uint256)",
+  "function initializeCurve(address token) external",
+  "function getCurveInfo(address token) external view returns (tuple(uint256 soldSupply, uint256 okbCollected, uint256 virtualOkbReserves, uint256 virtualTokenReserves, bool graduated, bool active))",
+  "function getTokenBalance(address token) external view returns (uint256)",
+  "event TokenBought(address indexed token, address indexed buyer, uint256 okbIn, uint256 tokensOut, uint256 newPrice)",
+  "event TokenSold(address indexed token, address indexed seller, uint256 tokensIn, uint256 okbOut, uint256 newPrice)"
 ] as const;

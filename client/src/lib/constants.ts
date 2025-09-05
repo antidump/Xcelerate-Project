@@ -2,10 +2,10 @@ import { parseEther } from 'viem';
 
 // Network constants
 export const NETWORK_CONFIG = {
-  CHAIN_ID: 196,
-  NAME: 'X Layer',
-  RPC_URL: 'https://rpc.xlayer.tech',
-  EXPLORER_URL: 'https://www.oklink.com/xlayer',
+  CHAIN_ID: 1952,
+  NAME: 'X Layer Testnet',
+  RPC_URL: 'https://testrpc.xlayer.tech/terigon',
+  EXPLORER_URL: 'https://www.oklink.com/xlayer-testnet',
   NATIVE_CURRENCY: {
     name: 'OKB',
     symbol: 'OKB',
@@ -106,7 +106,7 @@ export const ANALYTICS_CONSTANTS = {
 export const ERROR_MESSAGES = {
   WALLET: {
     NOT_CONNECTED: 'Please connect your wallet to continue',
-    WRONG_NETWORK: 'Please switch to X Layer network',
+    WRONG_NETWORK: 'Please switch to X Layer Testnet network',
     INSUFFICIENT_BALANCE: 'Insufficient balance for this transaction',
     TRANSACTION_REJECTED: 'Transaction was rejected by user',
   },
@@ -155,7 +155,7 @@ export const EXTERNAL_URLS = {
   TWITTER: 'https://twitter.com/xceleratexlayer',
   DISCORD: 'https://discord.gg/xcelerate',
   TELEGRAM: 'https://t.me/xcelerate',
-  OKLINK_EXPLORER: 'https://www.oklink.com/xlayer',
+  OKLINK_EXPLORER: 'https://www.oklink.com/xlayer-testnet',
 } as const;
 
 // Theme constants

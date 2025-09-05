@@ -1,0 +1,1027 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xcelerate - Modern Meme Token Launchpad on X Layer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          borderRadius: {
+            lg: "var(--radius)",
+            md: "calc(var(--radius) - 2px)",
+            sm: "calc(var(--radius) - 4px)",
+          },
+          colors: {
+            background: "var(--background)",
+            foreground: "var(--foreground)",
+            card: {
+              DEFAULT: "var(--card)",
+              foreground: "var(--card-foreground)",
+            },
+            popover: {
+              DEFAULT: "var(--popover)",
+              foreground: "var(--popover-foreground)",
+            },
+            primary: {
+              DEFAULT: "var(--primary)",
+              foreground: "var(--primary-foreground)",
+            },
+            secondary: {
+              DEFAULT: "var(--secondary)",
+              foreground: "var(--secondary-foreground)",
+            },
+            muted: {
+              DEFAULT: "var(--muted)",
+              foreground: "var(--muted-foreground)",
+            },
+            accent: {
+              DEFAULT: "var(--accent)",
+              foreground: "var(--accent-foreground)",
+            },
+            destructive: {
+              DEFAULT: "var(--destructive)",
+              foreground: "var(--destructive-foreground)",
+            },
+            border: "var(--border)",
+            input: "var(--input)",
+            ring: "var(--ring)",
+            chart: {
+              "1": "var(--chart-1)",
+              "2": "var(--chart-2)",
+              "3": "var(--chart-3)",
+              "4": "var(--chart-4)",
+              "5": "var(--chart-5)",
+            }
+          },
+          fontFamily: {
+            sans: ["Inter", "var(--font-sans)"],
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.5s ease-in-out',
+            'slide-up': 'slideUp 0.3s ease-out',
+            'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+          }
+        },
+      }
+    };
+    </script>
+    <style>
+      :root {
+        --background: hsl(0 0% 10%);
+        --foreground: hsl(0 0% 98%);
+        --card: hsl(0 0% 12%);
+        --card-foreground: hsl(0 0% 98%);
+        --popover: hsl(0 0% 12%);
+        --popover-foreground: hsl(0 0% 98%);
+        --primary: hsl(0 0% 98%);
+        --primary-foreground: hsl(0 0% 9%);
+        --secondary: hsl(0 0% 20%);
+        --secondary-foreground: hsl(0 0% 98%);
+        --muted: hsl(0 0% 20%);
+        --muted-foreground: hsl(0 0% 65%);
+        --accent: hsl(0 0% 20%);
+        --accent-foreground: hsl(0 0% 98%);
+        --destructive: hsl(0 72% 51%);
+        --destructive-foreground: hsl(0 0% 98%);
+        --border: hsl(0 0% 20%);
+        --input: hsl(0 0% 20%);
+        --ring: hsl(0 0% 83%);
+        --radius: 12px;
+        --chart-1: hsl(220 70% 50%);
+        --chart-2: hsl(160 60% 45%);
+        --chart-3: hsl(30 80% 55%);
+        --chart-4: hsl(280 65% 60%);
+        --chart-5: hsl(340 75% 55%);
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+
+      @keyframes slideUp {
+        from { 
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to { 
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .glass-card {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      }
+
+      .glass-card-dark {
+        background: rgba(0, 0, 0, 0.25);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+      }
+
+      .gradient-text {
+        background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .hero-gradient {
+        background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #2d2d2d 100%);
+      }
+
+      .pulse-ring {
+        animation: pulse-ring 1.25s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+      }
+
+      @keyframes pulse-ring {
+        0% {
+          transform: scale(0.33);
+        }
+        80%, 100% {
+          opacity: 0;
+        }
+      }
+
+      .token-card:hover {
+        transform: translateY(-4px);
+        transition: all 0.3s ease;
+      }
+
+      .modal-backdrop {
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(4px);
+      }
+    </style>
+</head>
+<body class="bg-background text-foreground font-sans">
+  
+  <!-- @COMPONENT: Header [navigation and wallet connection] -->
+  <header class="glass-card-dark sticky top-0 z-50 border-b border-border">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 lg:h-20">
+        <!-- Logo -->
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-white to-gray-300 flex items-center justify-center">
+            <i class="fas fa-rocket text-black text-lg"></i>
+          </div>
+          <span class="text-xl lg:text-2xl font-bold gradient-text">Xcelerate</span>
+        </div>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden lg:flex items-center space-x-8">
+          <a href="#" class="text-muted-foreground hover:text-foreground transition-colors">Discover</a>
+          <a href="#" class="text-muted-foreground hover:text-foreground transition-colors">Create</a>
+          <a href="#" class="text-muted-foreground hover:text-foreground transition-colors">Portfolio</a>
+          <a href="#" class="text-muted-foreground hover:text-foreground transition-colors">Analytics</a>
+        </nav>
+
+        <!-- Wallet Connection -->
+        <div class="flex items-center space-x-4">
+          <div class="hidden sm:flex items-center space-x-2 glass-card px-3 py-2 rounded-lg">
+            <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+            <span class="text-sm text-muted-foreground">X Layer</span>
+          </div>
+          <button class="glass-card hover:bg-white/10 transition-all duration-300 px-4 py-2 rounded-xl font-medium" data-event="click:connectWallet">
+            <i class="fas fa-wallet mr-2"></i>
+            <span class="hidden sm:inline">Connect Wallet</span>
+            <span class="sm:hidden">Connect</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- @END_COMPONENT: Header -->
+
+  <!-- @COMPONENT: Hero [main landing section] -->
+  <section class="hero-gradient relative overflow-hidden">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+      <div class="text-center max-w-4xl mx-auto">
+        <h1 class="text-4xl sm:text-6xl lg:text-7xl font-bold mb-6 animate-fade-in">
+          <span class="gradient-text">Launch Your</span><br>
+          <span class="text-white">Meme Token</span>
+        </h1>
+        <p class="text-xl lg:text-2xl text-muted-foreground mb-8 animate-slide-up">
+          The modern bonding curve launchpad on X Layer. Create, trade, and graduate your tokens to DEX automatically.
+        </p>
+        
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6 mb-12 animate-slide-up">
+          <div class="glass-card p-6 rounded-2xl">
+            <div class="text-3xl font-bold text-white" data-bind="stats.totalTokens">1,247</div>
+            <div class="text-sm text-muted-foreground">Tokens Created</div>
+          </div>
+          <div class="glass-card p-6 rounded-2xl">
+            <div class="text-3xl font-bold text-white" data-bind="stats.totalVolume">₪2.4M</div>
+            <div class="text-sm text-muted-foreground">Total Volume</div>
+          </div>
+          <div class="glass-card p-6 rounded-2xl">
+            <div class="text-3xl font-bold text-white" data-bind="stats.graduatedTokens">89</div>
+            <div class="text-sm text-muted-foreground">Graduated to DEX</div>
+          </div>
+        </div>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <button class="bg-white text-black px-8 py-4 rounded-2xl font-semibold text-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 w-full sm:w-auto" data-event="click:openCreateModal">
+            <i class="fas fa-plus mr-2"></i>
+            Create Token
+          </button>
+          <button class="glass-card hover:bg-white/10 px-8 py-4 rounded-2xl font-semibold text-lg transition-all duration-300 w-full sm:w-auto" data-event="click:scrollToDiscover">
+            <i class="fas fa-search mr-2"></i>
+            Discover Tokens
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Background decoration -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+      <div class="absolute -top-40 -right-40 w-80 h-80 bg-white/5 rounded-full blur-3xl"></div>
+      <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-white/5 rounded-full blur-3xl"></div>
+    </div>
+  </section>
+  <!-- @END_COMPONENT: Hero -->
+
+  <!-- @COMPONENT: TokenDiscovery [token grid and filtering] -->
+  <section class="py-16 lg:py-24 bg-gradient-to-b from-background to-black/50" id="discover">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-12">
+        <div>
+          <h2 class="text-3xl lg:text-4xl font-bold mb-4">Discover Tokens</h2>
+          <p class="text-muted-foreground text-lg">Find the next big meme token on the bonding curve</p>
+        </div>
+        
+        <!-- Filters -->
+        <div class="flex flex-wrap gap-4 mt-6 lg:mt-0">
+          <div class="flex items-center space-x-2">
+            <select class="glass-card bg-transparent border border-border rounded-xl px-4 py-2 text-foreground focus:outline-none focus:ring-2 focus:ring-ring">
+              <option value="all">All Tokens</option>
+              <option value="active">Active</option>
+              <option value="graduated">Graduated</option>
+            </select>
+          </div>
+          <div class="flex items-center space-x-2">
+            <select class="glass-card bg-transparent border border-border rounded-xl px-4 py-2 text-foreground focus:outline-none focus:ring-2 focus:ring-ring">
+              <option value="newest">Newest</option>
+              <option value="volume">Volume</option>
+              <option value="progress">Progress</option>
+            </select>
+          </div>
+          <div class="relative">
+            <input type="text" placeholder="Search tokens..." class="glass-card bg-transparent border border-border rounded-xl px-4 py-2 pl-10 text-foreground focus:outline-none focus:ring-2 focus:ring-ring min-w-60">
+            <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Token Grid -->
+      <!-- @MAP: tokens.map(token => ( -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <!-- Token Card 1 -->
+        <div class="glass-card p-6 rounded-2xl hover:bg-white/10 transition-all duration-300 token-card cursor-pointer" data-event="click:openTradingModal" data-mock="true">
+          <div class="flex items-center space-x-3 mb-4">
+            <!-- Mock meme token image of a cute cartoon dog with sunglasses -->
+            <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&h=80" alt="DOGGO token" class="w-12 h-12 rounded-xl object-cover">
+            <div>
+              <h3 class="font-semibold text-lg" data-bind="token.name">DOGGO</h3>
+              <p class="text-sm text-muted-foreground" data-bind="token.symbol">DOGGO</p>
+            </div>
+          </div>
+          
+          <p class="text-sm text-muted-foreground mb-4" data-mock="true">The goodest boy on X Layer! 🐕</p>
+          
+          <!-- Progress Bar -->
+          <div class="mb-4">
+            <div class="flex justify-between text-sm mb-2">
+              <span>Progress</span>
+              <span data-bind="token.progress">67%</span>
+            </div>
+            <div class="w-full bg-muted rounded-full h-2">
+              <div class="bg-gradient-to-r from-white to-gray-300 h-2 rounded-full" style="width: 67%"></div>
+            </div>
+          </div>
+          
+          <div class="grid grid-cols-2 gap-4 text-sm">
+            <div>
+              <div class="text-muted-foreground">Price</div>
+              <div class="font-medium" data-bind="token.price">₪0.00123</div>
+            </div>
+            <div>
+              <div class="text-muted-foreground">Market Cap</div>
+              <div class="font-medium" data-bind="token.marketCap">53.6k OKB</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Token Card 2 -->
+        <div class="glass-card p-6 rounded-2xl hover:bg-white/10 transition-all duration-300 token-card cursor-pointer" data-event="click:openTradingModal" data-mock="true">
+          <div class="flex items-center space-x-3 mb-4">
+            <!-- Mock meme token image of a rocket ship with flames -->
+            <img src="https://images.unsplash.com/photo-1517976547714-720226b864c1?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&h=80" alt="MOON token" class="w-12 h-12 rounded-xl object-cover">
+            <div>
+              <h3 class="font-semibold text-lg" data-bind="token.name">MOON</h3>
+              <p class="text-sm text-muted-foreground" data-bind="token.symbol">MOON</p>
+            </div>
+            <div class="bg-green-500/20 text-green-400 px-2 py-1 rounded-lg text-xs font-medium">
+              <i class="fas fa-graduation-cap mr-1"></i>
+              Graduated
+            </div>
+          </div>
+          
+          <p class="text-sm text-muted-foreground mb-4" data-mock="true">To the moon and beyond! 🚀</p>
+          
+          <div class="grid grid-cols-2 gap-4 text-sm">
+            <div>
+              <div class="text-muted-foreground">Price</div>
+              <div class="font-medium" data-bind="token.price">₪0.0234</div>
+            </div>
+            <div>
+              <div class="text-muted-foreground">24h Volume</div>
+              <div class="font-medium text-green-400" data-bind="token.volume">+156.7k</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Token Card 3 -->
+        <div class="glass-card p-6 rounded-2xl hover:bg-white/10 transition-all duration-300 token-card cursor-pointer" data-event="click:openTradingModal" data-mock="true">
+          <div class="flex items-center space-x-3 mb-4">
+            <!-- Mock meme token image of a cute cat with laser eyes -->
+            <img src="https://images.unsplash.com/photo-1574158622682-e40e69881006?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&h=80" alt="LASER token" class="w-12 h-12 rounded-xl object-cover">
+            <div>
+              <h3 class="font-semibold text-lg" data-bind="token.name">LASER</h3>
+              <p class="text-sm text-muted-foreground" data-bind="token.symbol">LASER</p>
+            </div>
+          </div>
+          
+          <p class="text-sm text-muted-foreground mb-4" data-mock="true">Cat with laser eyes destroying shorts! 👁️‍🗨️</p>
+          
+          <div class="mb-4">
+            <div class="flex justify-between text-sm mb-2">
+              <span>Progress</span>
+              <span data-bind="token.progress">34%</span>
+            </div>
+            <div class="w-full bg-muted rounded-full h-2">
+              <div class="bg-gradient-to-r from-white to-gray-300 h-2 rounded-full" style="width: 34%"></div>
+            </div>
+          </div>
+          
+          <div class="grid grid-cols-2 gap-4 text-sm">
+            <div>
+              <div class="text-muted-foreground">Price</div>
+              <div class="font-medium" data-bind="token.price">₪0.00089</div>
+            </div>
+            <div>
+              <div class="text-muted-foreground">Market Cap</div>
+              <div class="font-medium" data-bind="token.marketCap">27.2k OKB</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Token Card 4 -->
+        <div class="glass-card p-6 rounded-2xl hover:bg-white/10 transition-all duration-300 token-card cursor-pointer" data-event="click:openTradingModal" data-mock="true">
+          <div class="flex items-center space-x-3 mb-4">
+            <!-- Mock meme token image of a diamond hand gesture -->
+            <img src="https://images.unsplash.com/photo-1601342630314-8427c38bf5e6?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&h=80" alt="DIAMOND token" class="w-12 h-12 rounded-xl object-cover">
+            <div>
+              <h3 class="font-semibold text-lg" data-bind="token.name">DIAMOND</h3>
+              <p class="text-sm text-muted-foreground" data-bind="token.symbol">💎</p>
+            </div>
+          </div>
+          
+          <p class="text-sm text-muted-foreground mb-4" data-mock="true">Diamond hands only! 💎🙌</p>
+          
+          <div class="mb-4">
+            <div class="flex justify-between text-sm mb-2">
+              <span>Progress</span>
+              <span data-bind="token.progress">89%</span>
+            </div>
+            <div class="w-full bg-muted rounded-full h-2">
+              <div class="bg-gradient-to-r from-white to-gray-300 h-2 rounded-full" style="width: 89%"></div>
+            </div>
+          </div>
+          
+          <div class="grid grid-cols-2 gap-4 text-sm">
+            <div>
+              <div class="text-muted-foreground">Price</div>
+              <div class="font-medium" data-bind="token.price">₪0.00456</div>
+            </div>
+            <div>
+              <div class="text-muted-foreground">Market Cap</div>
+              <div class="font-medium" data-bind="token.marketCap">71.2k OKB</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- @END_MAP )) -->
+
+      <!-- Load More -->
+      <div class="text-center mt-12">
+        <button class="glass-card hover:bg-white/10 px-8 py-4 rounded-2xl font-medium transition-all duration-300" data-event="click:loadMore">
+          Load More Tokens
+        </button>
+      </div>
+    </div>
+  </section>
+  <!-- @END_COMPONENT: TokenDiscovery -->
+
+  <!-- @COMPONENT: CreateTokenModal [token creation interface] -->
+  <!-- @STATE: isCreateModalOpen:boolean = false -->
+  <div id="createTokenModal" class="fixed inset-0 z-50 hidden modal-backdrop" data-event="click:closeModal">
+    <div class="flex items-center justify-center min-h-screen p-4">
+      <div class="glass-card-dark max-w-md w-full rounded-3xl p-8 transform transition-all duration-300" onclick="event.stopPropagation()">
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-2xl font-bold">Create Token</h2>
+          <button class="text-muted-foreground hover:text-foreground transition-colors" data-event="click:closeModal">
+            <i class="fas fa-times text-xl"></i>
+          </button>
+        </div>
+
+        <form class="space-y-6">
+          <div>
+            <label class="block text-sm font-medium mb-2">Token Name</label>
+            <input type="text" placeholder="e.g., Super Doge" class="w-full glass-card bg-transparent border border-border rounded-xl px-4 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-ring" data-implementation="Validate token name uniqueness" data-mock="true">
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-2">Token Symbol</label>
+            <input type="text" placeholder="e.g., SDOGE" class="w-full glass-card bg-transparent border border-border rounded-xl px-4 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-ring uppercase" data-implementation="Auto-uppercase and validate symbol format" data-mock="true">
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-2">Description</label>
+            <textarea placeholder="Tell everyone about your token..." rows="3" class="w-full glass-card bg-transparent border border-border rounded-xl px-4 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-none" data-mock="true"></textarea>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-2">Token Image</label>
+            <div class="glass-card border-2 border-dashed border-border rounded-xl p-8 text-center cursor-pointer hover:border-white/50 transition-colors" data-implementation="File upload with image preview" data-mock-image="true">
+              <i class="fas fa-cloud-upload-alt text-3xl text-muted-foreground mb-4"></i>
+              <p class="text-muted-foreground">Click to upload or drag and drop</p>
+              <p class="text-sm text-muted-foreground mt-2">PNG, JPG up to 10MB</p>
+            </div>
+          </div>
+
+          <!-- Fee Information -->
+          <div class="glass-card p-4 rounded-xl bg-yellow-500/10 border border-yellow-500/20">
+            <div class="flex items-center space-x-2">
+              <i class="fas fa-info-circle text-yellow-400"></i>
+              <span class="text-sm font-medium">Creation Fee: 0.001 OKB</span>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="flex gap-4">
+            <button type="button" class="flex-1 glass-card hover:bg-white/10 px-6 py-3 rounded-xl font-medium transition-all duration-300" data-event="click:closeModal">
+              Cancel
+            </button>
+            <button type="submit" class="flex-1 bg-white text-black px-6 py-3 rounded-xl font-medium hover:bg-gray-100 transition-all duration-300" data-event="click:createToken" data-implementation="Should validate form and create token contract">
+              Create Token
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- @END_COMPONENT: CreateTokenModal -->
+
+  <!-- @COMPONENT: TradingModal [bonding curve trading interface] -->
+  <!-- @STATE: isTradingModalOpen:boolean = false -->
+  <div id="tradingModal" class="fixed inset-0 z-50 hidden modal-backdrop" data-event="click:closeModal">
+    <div class="flex items-center justify-center min-h-screen p-4">
+      <div class="glass-card-dark max-w-lg w-full rounded-3xl p-8 transform transition-all duration-300" onclick="event.stopPropagation()">
+        <div class="flex items-center justify-between mb-6">
+          <div class="flex items-center space-x-3">
+            <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?ixlib=rb-4.0.3&auto=format&fit=crop&w=48&h=48" alt="Token" class="w-12 h-12 rounded-xl object-cover" data-mock-image="true">
+            <div>
+              <h2 class="text-xl font-bold" data-bind="selectedToken.name">DOGGO</h2>
+              <p class="text-sm text-muted-foreground" data-bind="selectedToken.price">₪0.00123</p>
+            </div>
+          </div>
+          <button class="text-muted-foreground hover:text-foreground transition-colors" data-event="click:closeTradingModal">
+            <i class="fas fa-times text-xl"></i>
+          </button>
+        </div>
+
+        <!-- Bonding Curve Progress -->
+        <div class="mb-8">
+          <div class="flex justify-between text-sm mb-2">
+            <span>Bonding Curve Progress</span>
+            <span data-bind="token.progress">67% to graduation</span>
+          </div>
+          <div class="w-full bg-muted rounded-full h-3">
+            <div class="bg-gradient-to-r from-blue-500 to-purple-500 h-3 rounded-full relative" style="width: 67%">
+              <div class="absolute right-0 top-1/2 transform -translate-y-1/2 w-4 h-4 bg-white rounded-full shadow-lg"></div>
+            </div>
+          </div>
+          <div class="flex justify-between text-xs text-muted-foreground mt-2">
+            <span>53.6k / 80k OKB</span>
+            <span>26.4k OKB to DEX</span>
+          </div>
+        </div>
+
+        <!-- Trading Tabs -->
+        <div class="flex glass-card rounded-xl p-1 mb-6">
+          <button class="flex-1 px-4 py-2 rounded-lg bg-white text-black font-medium tab-active">
+            Buy
+          </button>
+          <button class="flex-1 px-4 py-2 rounded-lg text-muted-foreground font-medium" data-event="click:switchToSell">
+            Sell
+          </button>
+        </div>
+
+        <!-- Trading Form -->
+        <form class="space-y-6" data-implementation="Implement bonding curve calculations">
+          <div>
+            <label class="block text-sm font-medium mb-2">You Pay</label>
+            <div class="glass-card border border-border rounded-xl p-4">
+              <div class="flex items-center justify-between">
+                <input type="number" placeholder="0.0" class="bg-transparent text-2xl font-medium focus:outline-none w-full" step="0.0001" data-bind="trade.payAmount" data-mock="true">
+                <div class="flex items-center space-x-2">
+                  <span class="text-sm text-muted-foreground">OKB</span>
+                  <i class="fas fa-chevron-down text-muted-foreground cursor-pointer"></i>
+                </div>
+              </div>
+              <div class="text-sm text-muted-foreground mt-2" data-bind="wallet.okbBalance">Balance: 12.45 OKB</div>
+            </div>
+          </div>
+
+          <div class="text-center">
+            <i class="fas fa-arrow-down text-muted-foreground"></i>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-2">You Receive</label>
+            <div class="glass-card border border-border rounded-xl p-4">
+              <div class="flex items-center justify-between">
+                <div class="text-2xl font-medium" data-bind="trade.receiveAmount">0.0</div>
+                <div class="flex items-center space-x-2">
+                  <span class="text-sm text-muted-foreground" data-bind="selectedToken.symbol">DOGGO</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Trade Details -->
+          <div class="glass-card p-4 rounded-xl space-y-2 text-sm">
+            <div class="flex justify-between">
+              <span class="text-muted-foreground">Price Impact</span>
+              <span class="text-yellow-400" data-bind="trade.priceImpact">1.2%</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-muted-foreground">Slippage Tolerance</span>
+              <span data-bind="trade.slippage">2.0%</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-muted-foreground">Minimum Received</span>
+              <span data-bind="trade.minimumReceived">~8,130 DOGGO</span>
+            </div>
+          </div>
+
+          <!-- Quick Amount Buttons -->
+          <div class="grid grid-cols-4 gap-2">
+            <button type="button" class="glass-card hover:bg-white/10 px-3 py-2 rounded-lg text-sm font-medium transition-colors" data-event="click:setAmount25">25%</button>
+            <button type="button" class="glass-card hover:bg-white/10 px-3 py-2 rounded-lg text-sm font-medium transition-colors" data-event="click:setAmount50">50%</button>
+            <button type="button" class="glass-card hover:bg-white/10 px-3 py-2 rounded-lg text-sm font-medium transition-colors" data-event="click:setAmount75">75%</button>
+            <button type="button" class="glass-card hover:bg-white/10 px-3 py-2 rounded-lg text-sm font-medium transition-colors" data-event="click:setAmountMax">MAX</button>
+          </div>
+
+          <!-- Action Button -->
+          <button type="submit" class="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-4 rounded-xl font-medium hover:from-blue-600 hover:to-purple-600 transition-all duration-300" data-event="click:executeTrade" data-implementation="Execute bonding curve trade with slippage protection">
+            <i class="fas fa-shopping-cart mr-2"></i>
+            Buy DOGGO
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- @END_COMPONENT: TradingModal -->
+
+  <!-- @COMPONENT: Portfolio [user holdings and P&L tracking] -->
+  <section class="py-16 lg:py-24 bg-gradient-to-b from-black/50 to-background">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between mb-12">
+        <div>
+          <h2 class="text-3xl lg:text-4xl font-bold mb-4">Your Portfolio</h2>
+          <p class="text-muted-foreground text-lg">Track your token holdings and performance</p>
+        </div>
+        <button class="glass-card hover:bg-white/10 px-6 py-3 rounded-xl font-medium transition-all duration-300" data-event="click:exportPortfolio">
+          <i class="fas fa-download mr-2"></i>
+          Export
+        </button>
+      </div>
+
+      <!-- Portfolio Stats -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <div class="glass-card p-6 rounded-2xl">
+          <div class="text-sm text-muted-foreground mb-1">Total Value</div>
+          <div class="text-2xl font-bold" data-bind="portfolio.totalValue">47.32 OKB</div>
+          <div class="text-sm text-green-400 flex items-center">
+            <i class="fas fa-arrow-up text-xs mr-1"></i>
+            <span data-bind="portfolio.totalChange">+12.5%</span>
+          </div>
+        </div>
+        <div class="glass-card p-6 rounded-2xl">
+          <div class="text-sm text-muted-foreground mb-1">Total P&L</div>
+          <div class="text-2xl font-bold text-green-400" data-bind="portfolio.totalPnL">+5.23 OKB</div>
+          <div class="text-sm text-muted-foreground" data-bind="portfolio.totalPnLPercent">+12.42%</div>
+        </div>
+        <div class="glass-card p-6 rounded-2xl">
+          <div class="text-sm text-muted-foreground mb-1">Holdings</div>
+          <div class="text-2xl font-bold" data-bind="portfolio.totalHoldings">7</div>
+          <div class="text-sm text-muted-foreground">Active tokens</div>
+        </div>
+        <div class="glass-card p-6 rounded-2xl">
+          <div class="text-sm text-muted-foreground mb-1">Best Performer</div>
+          <div class="text-2xl font-bold text-green-400" data-bind="portfolio.bestPerformer">+340%</div>
+          <div class="text-sm text-muted-foreground" data-bind="portfolio.bestToken">MOON</div>
+        </div>
+      </div>
+
+      <!-- Holdings Table -->
+      <div class="glass-card rounded-2xl overflow-hidden">
+        <div class="p-6 border-b border-border">
+          <h3 class="text-lg font-semibold">Token Holdings</h3>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full">
+            <thead class="bg-white/5">
+              <tr>
+                <th class="text-left p-4 font-medium text-muted-foreground">Token</th>
+                <th class="text-left p-4 font-medium text-muted-foreground">Balance</th>
+                <th class="text-left p-4 font-medium text-muted-foreground">Value</th>
+                <th class="text-left p-4 font-medium text-muted-foreground">P&L</th>
+                <th class="text-left p-4 font-medium text-muted-foreground">Actions</th>
+              </tr>
+            </thead>
+            <tbody data-implementation="Map through user's token holdings">
+              <tr class="border-b border-border hover:bg-white/5 transition-colors" data-mock="true">
+                <td class="p-4">
+                  <div class="flex items-center space-x-3">
+                    <img src="https://images.unsplash.com/photo-1517976547714-720226b864c1?ixlib=rb-4.0.3&auto=format&fit=crop&w=40&h=40" alt="MOON" class="w-10 h-10 rounded-lg object-cover">
+                    <div>
+                      <div class="font-medium" data-bind="holding.name">MOON</div>
+                      <div class="text-sm text-muted-foreground" data-bind="holding.symbol">MOON</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="p-4">
+                  <div class="font-medium" data-bind="holding.balance">45,678</div>
+                  <div class="text-sm text-muted-foreground">tokens</div>
+                </td>
+                <td class="p-4">
+                  <div class="font-medium" data-bind="holding.value">23.45 OKB</div>
+                  <div class="text-sm text-muted-foreground" data-bind="holding.usdValue">$892.34</div>
+                </td>
+                <td class="p-4">
+                  <div class="font-medium text-green-400" data-bind="holding.pnl">+15.67 OKB</div>
+                  <div class="text-sm text-green-400" data-bind="holding.pnlPercent">+201.5%</div>
+                </td>
+                <td class="p-4">
+                  <button class="glass-card hover:bg-white/10 px-3 py-1 rounded-lg text-sm font-medium transition-colors" data-event="click:trade">
+                    Trade
+                  </button>
+                </td>
+              </tr>
+              
+              <tr class="border-b border-border hover:bg-white/5 transition-colors" data-mock="true">
+                <td class="p-4">
+                  <div class="flex items-center space-x-3">
+                    <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?ixlib=rb-4.0.3&auto=format&fit=crop&w=40&h=40" alt="DOGGO" class="w-10 h-10 rounded-lg object-cover">
+                    <div>
+                      <div class="font-medium" data-bind="holding.name">DOGGO</div>
+                      <div class="text-sm text-muted-foreground" data-bind="holding.symbol">DOGGO</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="p-4">
+                  <div class="font-medium" data-bind="holding.balance">123,456</div>
+                  <div class="text-sm text-muted-foreground">tokens</div>
+                </td>
+                <td class="p-4">
+                  <div class="font-medium" data-bind="holding.value">15.23 OKB</div>
+                  <div class="text-sm text-muted-foreground" data-bind="holding.usdValue">$578.74</div>
+                </td>
+                <td class="p-4">
+                  <div class="font-medium text-green-400" data-bind="holding.pnl">+3.45 OKB</div>
+                  <div class="text-sm text-green-400" data-bind="holding.pnlPercent">+29.3%</div>
+                </td>
+                <td class="p-4">
+                  <button class="glass-card hover:bg-white/10 px-3 py-1 rounded-lg text-sm font-medium transition-colors" data-event="click:trade">
+                    Trade
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- @END_COMPONENT: Portfolio -->
+
+  <!-- @COMPONENT: Analytics [platform statistics and charts] -->
+  <section class="py-16 lg:py-24 bg-gradient-to-b from-background to-black/80">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl lg:text-4xl font-bold mb-4">Platform Analytics</h2>
+        <p class="text-muted-foreground text-lg">Real-time insights into the Xcelerate ecosystem</p>
+      </div>
+
+      <!-- Key Metrics -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+        <div class="glass-card p-6 rounded-2xl text-center">
+          <div class="text-3xl font-bold mb-2" data-bind="analytics.totalVolume">₪2.4M</div>
+          <div class="text-sm text-muted-foreground">24h Volume</div>
+          <div class="text-sm text-green-400 mt-2">+23.5%</div>
+        </div>
+        <div class="glass-card p-6 rounded-2xl text-center">
+          <div class="text-3xl font-bold mb-2" data-bind="analytics.activeTokens">1,247</div>
+          <div class="text-sm text-muted-foreground">Active Tokens</div>
+          <div class="text-sm text-green-400 mt-2">+12 today</div>
+        </div>
+        <div class="glass-card p-6 rounded-2xl text-center">
+          <div class="text-3xl font-bold mb-2" data-bind="analytics.totalUsers">8,934</div>
+          <div class="text-sm text-muted-foreground">Total Users</div>
+          <div class="text-sm text-green-400 mt-2">+156 today</div>
+        </div>
+        <div class="glass-card p-6 rounded-2xl text-center">
+          <div class="text-3xl font-bold mb-2" data-bind="analytics.avgGradTime">3.2</div>
+          <div class="text-sm text-muted-foreground">Avg. Days to Graduate</div>
+          <div class="text-sm text-yellow-400 mt-2">-0.3 days</div>
+        </div>
+      </div>
+
+      <!-- Charts Section -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Volume Chart -->
+        <div class="glass-card p-8 rounded-2xl">
+          <div class="flex items-center justify-between mb-6">
+            <h3 class="text-lg font-semibold">Trading Volume</h3>
+            <select class="glass-card bg-transparent border border-border rounded-lg px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-ring">
+              <option>7D</option>
+              <option>30D</option>
+              <option>90D</option>
+            </select>
+          </div>
+          <!-- @FUNCTIONALITY: This should implement a line/area chart using Recharts showing trading volume over time -->
+          <div class="h-64 flex items-center justify-center bg-muted/20 rounded-xl" data-implementation="Use Recharts to show volume chart">
+            <div class="text-center text-muted-foreground">
+              <i class="fas fa-chart-line text-4xl mb-4"></i>
+              <p>Volume Chart</p>
+              <p class="text-sm">Recharts implementation needed</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Token Creation Chart -->
+        <div class="glass-card p-8 rounded-2xl">
+          <div class="flex items-center justify-between mb-6">
+            <h3 class="text-lg font-semibold">Token Creations</h3>
+            <select class="glass-card bg-transparent border border-border rounded-lg px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-ring">
+              <option>7D</option>
+              <option>30D</option>
+              <option>90D</option>
+            </select>
+          </div>
+          <!-- @FUNCTIONALITY: This should implement a bar chart using Recharts showing daily token creations -->
+          <div class="h-64 flex items-center justify-center bg-muted/20 rounded-xl" data-implementation="Use Recharts to show token creation bar chart">
+            <div class="text-center text-muted-foreground">
+              <i class="fas fa-chart-bar text-4xl mb-4"></i>
+              <p>Token Creation Chart</p>
+              <p class="text-sm">Recharts implementation needed</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Top Tokens -->
+      <div class="glass-card rounded-2xl overflow-hidden mt-8">
+        <div class="p-6 border-b border-border">
+          <h3 class="text-lg font-semibold">Top Performing Tokens</h3>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full">
+            <thead class="bg-white/5">
+              <tr>
+                <th class="text-left p-4 font-medium text-muted-foreground">Rank</th>
+                <th class="text-left p-4 font-medium text-muted-foreground">Token</th>
+                <th class="text-left p-4 font-medium text-muted-foreground">Price</th>
+                <th class="text-left p-4 font-medium text-muted-foreground">24h Change</th>
+                <th class="text-left p-4 font-medium text-muted-foreground">Volume</th>
+                <th class="text-left p-4 font-medium text-muted-foreground">Market Cap</th>
+              </tr>
+            </thead>
+            <tbody data-implementation="Show top performing tokens">
+              <tr class="border-b border-border hover:bg-white/5 transition-colors" data-mock="true">
+                <td class="p-4 font-medium">1</td>
+                <td class="p-4">
+                  <div class="flex items-center space-x-3">
+                    <img src="https://images.unsplash.com/photo-1517976547714-720226b864c1?ixlib=rb-4.0.3&auto=format&fit=crop&w=32&h=32" alt="MOON" class="w-8 h-8 rounded-lg object-cover">
+                    <div>
+                      <div class="font-medium">MOON</div>
+                      <div class="text-sm text-muted-foreground">Graduated</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="p-4 font-medium">₪0.0234</td>
+                <td class="p-4 font-medium text-green-400">+45.7%</td>
+                <td class="p-4 font-medium">156.7k OKB</td>
+                <td class="p-4 font-medium">1.2M OKB</td>
+              </tr>
+              
+              <tr class="border-b border-border hover:bg-white/5 transition-colors" data-mock="true">
+                <td class="p-4 font-medium">2</td>
+                <td class="p-4">
+                  <div class="flex items-center space-x-3">
+                    <img src="https://images.unsplash.com/photo-1601342630314-8427c38bf5e6?ixlib=rb-4.0.3&auto=format&fit=crop&w=32&h=32" alt="DIAMOND" class="w-8 h-8 rounded-lg object-cover">
+                    <div>
+                      <div class="font-medium">DIAMOND</div>
+                      <div class="text-sm text-muted-foreground">89% to graduate</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="p-4 font-medium">₪0.00456</td>
+                <td class="p-4 font-medium text-green-400">+23.1%</td>
+                <td class="p-4 font-medium">89.3k OKB</td>
+                <td class="p-4 font-medium">71.2k OKB</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- @END_COMPONENT: Analytics -->
+
+  <!-- Footer -->
+  <footer class="glass-card-dark border-t border-border py-12">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="col-span-1 md:col-span-2">
+          <div class="flex items-center space-x-3 mb-4">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-white to-gray-300 flex items-center justify-center">
+              <i class="fas fa-rocket text-black text-lg"></i>
+            </div>
+            <span class="text-xl font-bold gradient-text">Xcelerate</span>
+          </div>
+          <p class="text-muted-foreground mb-6 max-w-md">
+            The modern meme token launchpad on X Layer. Create, trade, and graduate your tokens to DEX automatically.
+          </p>
+          <div class="flex space-x-4">
+            <a href="#" class="text-muted-foreground hover:text-foreground transition-colors">
+              <i class="fab fa-twitter text-xl"></i>
+            </a>
+            <a href="#" class="text-muted-foreground hover:text-foreground transition-colors">
+              <i class="fab fa-discord text-xl"></i>
+            </a>
+            <a href="#" class="text-muted-foreground hover:text-foreground transition-colors">
+              <i class="fab fa-telegram text-xl"></i>
+            </a>
+            <a href="#" class="text-muted-foreground hover:text-foreground transition-colors">
+              <i class="fab fa-github text-xl"></i>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="font-semibold mb-4">Platform</h4>
+          <ul class="space-y-2 text-muted-foreground">
+            <li><a href="#" class="hover:text-foreground transition-colors">Create Token</a></li>
+            <li><a href="#" class="hover:text-foreground transition-colors">Discover</a></li>
+            <li><a href="#" class="hover:text-foreground transition-colors">Portfolio</a></li>
+            <li><a href="#" class="hover:text-foreground transition-colors">Analytics</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-semibold mb-4">Resources</h4>
+          <ul class="space-y-2 text-muted-foreground">
+            <li><a href="#" class="hover:text-foreground transition-colors">Documentation</a></li>
+            <li><a href="#" class="hover:text-foreground transition-colors">API</a></li>
+            <li><a href="#" class="hover:text-foreground transition-colors">Smart Contracts</a></li>
+            <li><a href="#" class="hover:text-foreground transition-colors">Support</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="border-t border-border pt-8 mt-8 flex flex-col sm:flex-row justify-between items-center">
+        <div class="text-sm text-muted-foreground">
+          © 2024 Xcelerate. All rights reserved.
+        </div>
+        <div class="flex space-x-6 text-sm text-muted-foreground mt-4 sm:mt-0">
+          <a href="#" class="hover:text-foreground transition-colors">Privacy Policy</a>
+          <a href="#" class="hover:text-foreground transition-colors">Terms of Service</a>
+          <a href="#" class="hover:text-foreground transition-colors">Security</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notifications -->
+  <div id="toast-container" class="fixed bottom-4 right-4 z-50 space-y-2" data-implementation="Toast notifications using Sonner or similar library">
+    <!-- Toasts will be dynamically inserted here -->
+  </div>
+
+  <script>
+    (function() {
+      // Modal functionality
+      function openModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+          modal.classList.remove('hidden');
+        }
+      }
+
+      function closeModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+          modal.classList.add('hidden');
+        }
+      }
+
+      // Event listeners for modal triggers
+      document.addEventListener('click', function(e) {
+        const target = e.target.closest('[data-event]');
+        if (!target) return;
+
+        const event = target.getAttribute('data-event');
+        
+        switch(event) {
+          case 'click:openCreateModal':
+            openModal('createTokenModal');
+            break;
+          case 'click:closeModal':
+            closeModal('createTokenModal');
+            break;
+          case 'click:openTradingModal':
+            openModal('tradingModal');
+            break;
+          case 'click:closeTradingModal':
+            closeModal('tradingModal');
+            break;
+          case 'click:scrollToDiscover':
+            document.getElementById('discover').scrollIntoView({ behavior: 'smooth' });
+            break;
+        }
+        
+        // TODO: Implement business logic, API calls, and state management for:
+        // - Wallet connection and authentication
+        // - Token creation with smart contract interaction
+        // - Real-time bonding curve calculations
+        // - Trading execution with slippage protection
+        // - Portfolio data fetching and updates
+        // - Real-time price feeds and notifications
+        // - Analytics data visualization
+      });
+
+      // Close modal when clicking outside
+      document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('modal-backdrop')) {
+          closeModal('createTokenModal');
+          closeModal('tradingModal');
+        }
+      });
+
+      // Smooth animations for cards and interactions
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-fade-in');
+          }
+        });
+      }, observerOptions);
+
+      // Observe all cards and main sections
+      document.querySelectorAll('.glass-card, .token-card').forEach(el => {
+        observer.observe(el);
+      });
+
+      // Add hover effects to interactive elements
+      document.querySelectorAll('.token-card').forEach(card => {
+        card.addEventListener('mouseenter', function() {
+          this.style.transform = 'translateY(-4px)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+          this.style.transform = 'translateY(0)';
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
